@@ -1,0 +1,1 @@
+export const CREATE_BUCKET = "CREATE_BUCKET";
