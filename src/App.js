@@ -1,24 +1,25 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "./store";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+
+import { store } from "./store";
+import { Header } from "./components/header/Header";
+import { Bucket } from "./components/bucket/Bucket";
 
 import "./App.css";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <CssBaseline />
+      <Router>
+        <Header />
         <Container maxWidth="md">
-          <Typography
-            component="div"
-            style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
-          />
+          <Switch>
+            <Route exact path="/create-bucket" component={Bucket} />
+          </Switch>
         </Container>
-      </div>
+      </Router>
     </Provider>
   );
 }

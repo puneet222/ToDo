@@ -1,0 +1,10 @@
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-task {
+  position: absolute;
+  right: 3%;
+}
