@@ -19,7 +19,9 @@ import { createBucket } from "../../actions/todoActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: "100vw"
+    marginTop: "1em",
+    maxWidth: "100%",
+    marginTop: "0px"
   },
   media: {
     height: 140
@@ -35,14 +37,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Bucket = ({ createBucket }) => {
-  const [title, setTitle] = useState("");
-  const [showTitle, setShowTitle] = useState(false);
+const Bucket = ({ createBucket, isEdit, currentBucket }) => {
+  const [title, setTitle] = useState(isEdit ? currentBucket.name : "");
+  const [showTitle, setShowTitle] = useState(isEdit ? true : false);
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(isEdit ? currentBucket.tasks : []);
+  const [color, setColor] = useState(isEdit ? currentBucket.color : "white");
 
   const classes = useStyles();
   const history = useHistory();
+
+  const colors = ["#fff59d", "#ffe0b2", "#c8e6c9", "#80deea", "#f8bbd0"];
 
   const handleTitleChange = event => {
     setTitle(event.target.value);
@@ -95,14 +100,33 @@ const Bucket = ({ createBucket }) => {
     const bucket = {
       id: uuid.v4(),
       name: title,
-      tasks
+      tasks,
+      color
     };
     createBucket(bucket);
     history.push("/");
   };
 
+  const updateBucket = () => {
+    const bucket = {
+      ...currentBucket,
+      name: title,
+      tasks,
+      color
+    };
+    console.log(bucket);
+  };
+
+  const createOrUpdateBucket = () => {
+    if (isEdit) {
+      updateBucket();
+    } else {
+      createNewBucket();
+    }
+  };
+
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} style={{ backgroundColor: color }}>
       <CardContent>
         <div>
           {showTitle ? (
@@ -148,6 +172,18 @@ const Bucket = ({ createBucket }) => {
           </Grid>
         </div>
       </CardContent>
+      <div className="colors">
+        {colors.map(color => {
+          return (
+            <button
+              key={color}
+              className="color-button"
+              style={{ backgroundColor: color }}
+              onClick={() => setColor(color)}
+            ></button>
+          );
+        })}
+      </div>
       <CardActions>
         <Button variant="contained" size="small" style={{ flex: 1 }}>
           Cancel
@@ -157,9 +193,9 @@ const Bucket = ({ createBucket }) => {
           size="small"
           color="primary"
           style={{ flex: 1 }}
-          onClick={createNewBucket}
+          onClick={createOrUpdateBucket}
         >
-          Create
+          {isEdit ? "Edit" : "Create"}
         </Button>
       </CardActions>
     </Card>
