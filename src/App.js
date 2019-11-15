@@ -5,8 +5,8 @@ import Container from "@material-ui/core/Container";
 
 import { store } from "./store";
 import { Header } from "./components/header/Header";
-import { Bucket } from "./components/bucket/Bucket";
-import { ToDo } from "./components/todo/ToDo";
+import Bucket from "./components/bucket/Bucket";
+import ToDo from "./components/todo/ToDo";
 
 import "./App.css";
 

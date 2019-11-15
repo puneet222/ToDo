@@ -1,0 +1,19 @@
+.no-bucket-message {
+  display: flex;
+  justify-content: center;
+  padding-top: 10%;
+  padding-bottom: 5%;
+}
+
+.button-center {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-right {
+  float: right;
+}
+
+.amber {
+  background-color: #ffd54f;
+}

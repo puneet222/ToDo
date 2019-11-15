@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import uuid from "uuid";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -9,10 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Input from "@material-ui/core/Input";
 import Fab from "@material-ui/core/Fab";
+import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 
 import { Tasks } from "./Tasks";
-import { Grid } from "@material-ui/core";
+import { createBucket } from "../../actions/todoActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -32,13 +35,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Bucket = () => {
+const Bucket = ({ createBucket }) => {
   const [title, setTitle] = useState("");
   const [showTitle, setShowTitle] = useState(false);
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
 
   const classes = useStyles();
+  const history = useHistory();
 
   const handleTitleChange = event => {
     setTitle(event.target.value);
@@ -85,6 +89,16 @@ export const Bucket = () => {
   const deleteTask = dtask => {
     let filteredTasks = tasks.filter(task => task.id !== dtask.id);
     setTasks([...filteredTasks]);
+  };
+
+  const createNewBucket = () => {
+    const bucket = {
+      id: uuid.v4(),
+      name: title,
+      tasks
+    };
+    createBucket(bucket);
+    history.push("/");
   };
 
   return (
@@ -143,6 +157,7 @@ export const Bucket = () => {
           size="small"
           color="primary"
           style={{ flex: 1 }}
+          onClick={createNewBucket}
         >
           Create
         </Button>
@@ -150,3 +165,5 @@ export const Bucket = () => {
     </Card>
   );
 };
+
+export default connect(null, { createBucket })(Bucket);
