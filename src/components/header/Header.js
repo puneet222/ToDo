@@ -14,11 +14,6 @@ export const Header = () => {
         <Typography variant="h6" gutterBottom>
           To Do App
         </Typography>
-        <Link to="create-bucket">
-          <Button variant="contained" color="secondary" className="create-task">
-            Create Task
-          </Button>
-        </Link>
       </Toolbar>
     </AppBar>
   );
