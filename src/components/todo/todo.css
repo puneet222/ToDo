@@ -11,7 +11,9 @@
 }
 
 .bottom-right {
-  float: right;
+  position: fixed !important;
+  bottom: 1%;
+  right: 1%;
 }
 
 .amber {

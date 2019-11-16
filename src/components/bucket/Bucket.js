@@ -97,6 +97,15 @@ const Bucket = ({
     setTasks([...tasks]);
   };
 
+  const updateTaskDescription = (id, description) => {
+    tasks.forEach(task => {
+      if (task.id === id) {
+        task.description = description;
+      }
+    });
+    setTasks([...tasks]);
+  };
+
   const deleteTask = dtask => {
     let filteredTasks = tasks.filter(task => task.id !== dtask.id);
     setTasks([...filteredTasks]);
@@ -154,7 +163,12 @@ const Bucket = ({
             />
           )}
         </div>
-        <Tasks tasks={tasks} updateTask={updateTask} deleteTask={deleteTask} />
+        <Tasks
+          tasks={tasks}
+          updateTask={updateTask}
+          deleteTask={deleteTask}
+          updateTaskDescription={updateTaskDescription}
+        />
         <div>
           <Grid container>
             <Grid item xs={12} md={6} lg={6}>

@@ -20,7 +20,7 @@ export const CreateBucket = ({ noBuckets }) => {
         <Fab
           variant="extended"
           aria-label="create"
-          className={noBuckets ? "button-center" : "bottom-right"}
+          className="bottom-right"
           style={{ backgroundColor: amber[400] }}
         >
           <Icon>edit</Icon>
