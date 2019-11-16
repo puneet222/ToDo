@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Typography,
@@ -6,7 +6,8 @@ import {
   Grid,
   Modal,
   Backdrop,
-  Fade
+  Fade,
+  Hidden
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -72,7 +73,6 @@ const ToDo = props => {
       <Modal
         className={classes.modal}
         open={open}
-        onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -80,7 +80,7 @@ const ToDo = props => {
         }}
       >
         <Fade in={open}>
-          <div className="modal-content">
+          <div className="modal-content-small">
             <Bucket
               isEdit={true}
               currentBucket={currentBucket}

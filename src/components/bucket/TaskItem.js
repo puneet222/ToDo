@@ -48,7 +48,11 @@ export const TaskItem = ({
                 onChange={() => handleChange(task)}
               />
               <span className="pointer" onClick={() => showInput(task)}>
-                {task.description}
+                {task.isDone ? (
+                  <strike>{task.description}</strike>
+                ) : (
+                  task.description
+                )}
               </span>
             </React.Fragment>
           )}

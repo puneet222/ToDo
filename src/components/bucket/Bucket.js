@@ -19,7 +19,6 @@ import { createBucket, updateBucket } from "../../actions/todoActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    marginTop: "1em",
     maxWidth: "100%",
     marginTop: "0px"
   },
@@ -61,6 +60,14 @@ const Bucket = ({
 
   const handleTaskChange = event => {
     setTask(event.target.value);
+  };
+
+  const handleCancel = () => {
+    if (isEdit) {
+      modalClose();
+    } else {
+      history.push("/");
+    }
   };
 
   const displayTitle = () => {
@@ -207,7 +214,12 @@ const Bucket = ({
         })}
       </div>
       <CardActions>
-        <Button variant="contained" size="small" style={{ flex: 1 }}>
+        <Button
+          variant="contained"
+          size="small"
+          onClick={handleCancel}
+          style={{ flex: 1 }}
+        >
           Cancel
         </Button>
         <Button

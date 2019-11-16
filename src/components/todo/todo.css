@@ -20,6 +20,27 @@
   background-color: #ffd54f;
 }
 
-.modal-content {
-  width: 95%;
+.modal-content-large {
+  width: 50%;
+}
+
+/* For Mobile */
+@media screen and (max-width: 540px) {
+  .modal-content-small {
+    width: 95%;
+  }
+}
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+  .modal-content-small {
+    width: 70%;
+  }
+}
+
+/* For big screens */
+@media screen and (min-width: 780px) {
+  .modal-content-small {
+    width: 50%;
+  }
 }
