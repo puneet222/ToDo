@@ -1,4 +1,4 @@
-import { CREATE_BUCKET, UPDATE_BUCKET } from "../actions/types";
+import { CREATE_BUCKET, UPDATE_BUCKET, DELETE_BUCKET } from "../actions/types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -18,6 +18,12 @@ export default (state, action) => {
             return bucket;
           }
         })
+      };
+    }
+    case DELETE_BUCKET: {
+      return {
+        ...state,
+        buckets: state.buckets.filter(bucket => bucket.id !== action.payload)
       };
     }
     default:

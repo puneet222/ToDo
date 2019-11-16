@@ -1,5 +1,9 @@
 import rootReducer from "../index";
-import { CREATE_BUCKET, UPDATE_BUCKET } from "../../actions/types";
+import {
+  CREATE_BUCKET,
+  UPDATE_BUCKET,
+  DELETE_BUCKET
+} from "../../actions/types";
 
 describe("Todo Reducer Test", () => {
   let initialState = {
@@ -71,6 +75,17 @@ describe("Todo Reducer Test", () => {
       payload: updatedBucket
     };
 
+    expect(rootReducer(initialState, action)).toEqual(expectedState);
+  });
+  it("should handle the action DELETE_BUCKET", () => {
+    let bucketId = initialState.buckets[0]["id"];
+    let expectedState = {
+      buckets: []
+    };
+    let action = {
+      type: DELETE_BUCKET,
+      payload: bucketId
+    };
     expect(rootReducer(initialState, action)).toEqual(expectedState);
   });
 });
