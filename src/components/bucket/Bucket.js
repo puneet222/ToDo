@@ -48,6 +48,7 @@ const Bucket = ({
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState(isEdit ? currentBucket.tasks : []);
   const [color, setColor] = useState(isEdit ? currentBucket.color : "white");
+  const [titleError, setTitleError] = useState(false);
 
   const classes = useStyles();
   const history = useHistory();
@@ -56,6 +57,11 @@ const Bucket = ({
 
   const handleTitleChange = event => {
     setTitle(event.target.value);
+    if (event.target.value === "") {
+      setTitleError(true);
+    } else {
+      setTitleError(false);
+    }
   };
 
   const handleTaskChange = event => {
@@ -119,6 +125,10 @@ const Bucket = ({
   };
 
   const createNewBucket = () => {
+    if (title === "") {
+      setTitleError(true);
+      return;
+    }
     const bucket = {
       id: uuid.v4(),
       name: title,
@@ -130,6 +140,10 @@ const Bucket = ({
   };
 
   const updateCurrentBucket = () => {
+    if (title === "") {
+      setTitleError(true);
+      return;
+    }
     const bucket = {
       ...currentBucket,
       name: title,
@@ -160,6 +174,7 @@ const Bucket = ({
           ) : (
             <TextField
               id="standard-basic"
+              error={titleError}
               className={classes.textField}
               label="Create Title"
               margin="normal"

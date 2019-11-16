@@ -48,7 +48,7 @@ const ToDo = props => {
           <Grid container>
             {props.buckets.map(bucket => {
               return (
-                <Grid item xs={12} md={4} lg={3} key={bucket.id}>
+                <Grid item xs={12} md={4} lg={3} sm={6} key={bucket.id}>
                   <Paper
                     className={classes.root}
                     style={{ backgroundColor: bucket.color }}
