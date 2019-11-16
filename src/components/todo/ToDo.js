@@ -81,7 +81,11 @@ const ToDo = props => {
       >
         <Fade in={open}>
           <div className="modal-content">
-            <Bucket isEdit={true} currentBucket={currentBucket} />
+            <Bucket
+              isEdit={true}
+              currentBucket={currentBucket}
+              modalClose={handleClose}
+            />
           </div>
         </Fade>
       </Modal>

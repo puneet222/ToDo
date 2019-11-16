@@ -1,11 +1,4 @@
-// import { combineReducers } from "redux";
-// import appReducer from "./appReducer";
-
-// export default combineReducers({
-//   app: appReducer
-// });
-
-import { CREATE_BUCKET } from "../actions/types";
+import { CREATE_BUCKET, UPDATE_BUCKET } from "../actions/types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -13,6 +6,18 @@ export default (state, action) => {
       return {
         ...state,
         buckets: [...state.buckets, action.payload]
+      };
+    }
+    case UPDATE_BUCKET: {
+      return {
+        ...state,
+        buckets: state.buckets.map(bucket => {
+          if (bucket.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return bucket;
+          }
+        })
       };
     }
     default:

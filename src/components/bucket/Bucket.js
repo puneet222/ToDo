@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 
 import { Tasks } from "./Tasks";
-import { createBucket } from "../../actions/todoActions";
+import { createBucket, updateBucket } from "../../actions/todoActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,7 +37,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Bucket = ({ createBucket, isEdit, currentBucket }) => {
+const Bucket = ({
+  createBucket,
+  updateBucket,
+  isEdit,
+  currentBucket,
+  modalClose
+}) => {
   const [title, setTitle] = useState(isEdit ? currentBucket.name : "");
   const [showTitle, setShowTitle] = useState(isEdit ? true : false);
   const [task, setTask] = useState("");
@@ -107,19 +113,21 @@ const Bucket = ({ createBucket, isEdit, currentBucket }) => {
     history.push("/");
   };
 
-  const updateBucket = () => {
+  const updateCurrentBucket = () => {
     const bucket = {
       ...currentBucket,
       name: title,
       tasks,
       color
     };
-    console.log(bucket);
+    updateBucket(bucket);
+    modalClose();
+    history.push("/");
   };
 
   const createOrUpdateBucket = () => {
     if (isEdit) {
-      updateBucket();
+      updateCurrentBucket();
     } else {
       createNewBucket();
     }
@@ -202,4 +210,4 @@ const Bucket = ({ createBucket, isEdit, currentBucket }) => {
   );
 };
 
-export default connect(null, { createBucket })(Bucket);
+export default connect(null, { createBucket, updateBucket })(Bucket);
