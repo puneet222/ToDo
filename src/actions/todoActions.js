@@ -1,4 +1,4 @@
-import { CREATE_BUCKET, UPDATE_BUCKET } from "./types";
+import { CREATE_BUCKET, UPDATE_BUCKET, DELETE_BUCKET } from "./types";
 
 export const createBucket = data => {
   return {
@@ -10,6 +10,13 @@ export const createBucket = data => {
 export const updateBucket = data => {
   return {
     type: UPDATE_BUCKET,
+    payload: data
+  };
+};
+
+export const deleteBucket = data => {
+  return {
+    type: DELETE_BUCKET,
     payload: data
   };
 };

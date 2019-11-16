@@ -1,2 +1,3 @@
 export const CREATE_BUCKET = "CREATE_BUCKET";
 export const UPDATE_BUCKET = "UPDATE_BUCKET";
+export const DELETE_BUCKET = "DELETE_BUCKET";

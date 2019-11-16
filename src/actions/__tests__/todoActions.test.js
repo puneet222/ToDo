@@ -1,5 +1,5 @@
-import { CREATE_BUCKET, UPDATE_BUCKET } from "../types";
-import { createBucket, updateBucket } from "../todoActions";
+import { CREATE_BUCKET, UPDATE_BUCKET, DELETE_BUCKET } from "../types";
+import { createBucket, updateBucket, deleteBucket } from "../todoActions";
 
 describe("ToDo Actions", () => {
   let bucket = {
@@ -29,5 +29,14 @@ describe("ToDo Actions", () => {
       payload: bucket
     };
     expect(updateBucket(bucket)).toEqual(expectedAction);
+  });
+
+  it("should create the action of type DELETE_BUCKET", () => {
+    let bucketId = "xyz";
+    let expectedAction = {
+      type: DELETE_BUCKET,
+      payload: bucketId
+    };
+    expect(deleteBucket(bucketId)).toEqual(expectedAction);
   });
 });
