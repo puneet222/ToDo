@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The project is live at [http://task-done.surge.sh/](http://task-done.surge.sh/)
+
+### [Demo](http://task-done.surge.sh/)
+
 ## Available Scripts
 
 In the project directory, you can run:
