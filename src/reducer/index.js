@@ -1,15 +1,21 @@
 import { CREATE_BUCKET, UPDATE_BUCKET, DELETE_BUCKET } from "../actions/types";
 
+const saveState = state => {
+  localStorage.setItem("appState", JSON.stringify(state));
+};
+
 export default (state, action) => {
   switch (action.type) {
     case CREATE_BUCKET: {
-      return {
+      let newState = {
         ...state,
         buckets: [...state.buckets, action.payload]
       };
+      saveState(newState);
+      return newState;
     }
     case UPDATE_BUCKET: {
-      return {
+      let newState = {
         ...state,
         buckets: state.buckets.map(bucket => {
           if (bucket.id === action.payload.id) {
@@ -19,12 +25,16 @@ export default (state, action) => {
           }
         })
       };
+      saveState(newState);
+      return newState;
     }
     case DELETE_BUCKET: {
-      return {
+      let newState = {
         ...state,
         buckets: state.buckets.filter(bucket => bucket.id !== action.payload)
       };
+      saveState(newState);
+      return newState;
     }
     default:
       return state;

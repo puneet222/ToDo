@@ -3,9 +3,15 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "../reducer";
 
-const initialState = {
-  buckets: []
-};
+let initialState;
+
+if (localStorage.getItem("appState")) {
+  initialState = JSON.parse(localStorage.getItem("appState"));
+} else {
+  initialState = {
+    buckets: []
+  };
+}
 
 const middleware = [thunk];
 
