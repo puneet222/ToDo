@@ -1,14 +1,28 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { shallow, mount } from "enzyme";
+import { MemoryRouter } from "react-router";
 import App from "../../App";
+import { Header } from "../header/Header";
+import ToDo from "../todo/ToDo";
+import Bucket from "../bucket/Bucket";
 
 describe("App Component Test", () => {
   it("should display application header", () => {
-    const div = document.createElement("div");
-    ReactDOM.render(<App />, div);
+    const component = shallow(<App />);
+    expect(component.find(Header).length).toEqual(1);
+  });
 
-    console.log(div.innerHTML);
+  it("should contain Todo Component by default", () => {
+    const component = mount(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    );
+    expect(component.find(ToDo).length).toEqual(1);
+    component.unmount();
+  });
 
-    ReactDOM.unmountComponentAtNode(div);
+  it("should contain Bucket Component on '/create-bucket' rount", () => {
+    // write test case for /create-bucket Route
   });
 });
