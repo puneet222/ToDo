@@ -6,11 +6,13 @@ import {
   Grid,
   Modal,
   Backdrop,
-  Fade
+  Fade,
+  Icon
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { CreateBucket } from "./CreateBucket";
+import { deleteBucket } from "../../actions/todoActions";
 import Bucket from "../bucket/Bucket";
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +42,10 @@ const ToDo = props => {
     setOpen(false);
   };
 
+  const handleDeleteBucket = bucketId => {
+    props.deleteBucket(bucketId);
+  };
+
   return (
     <React.Fragment>
       {props.buckets.length > 0 ? (
@@ -51,14 +57,40 @@ const ToDo = props => {
                   <Paper
                     className={classes.root}
                     style={{ backgroundColor: bucket.color }}
-                    onClick={() => handleOpen(bucket)}
+                    onClick={e => {
+                      e.stopPropagation();
+                      handleOpen(bucket);
+                    }}
                   >
-                    <Typography variant="h5" component="h3">
-                      {bucket.name}
-                    </Typography>
-                    <Typography component="p">
-                      {bucket.tasks.length} Tasks
-                    </Typography>
+                    <Grid container>
+                      <Grid xs={11}>
+                        <Typography variant="h5" component="h3">
+                          {bucket.name}
+                        </Typography>
+                        <Typography component="p">
+                          <span>{bucket.tasks.length} Tasks </span>
+                          <span>
+                            {
+                              bucket.tasks.filter(task => task.isDone === true)
+                                .length
+                            }{" "}
+                            Completed
+                          </span>
+                        </Typography>
+                      </Grid>
+                      <Grid xs={1}>
+                        <Icon
+                          color="disabled"
+                          className="pointer"
+                          onClick={e => {
+                            e.stopPropagation();
+                            handleDeleteBucket(bucket.id);
+                          }}
+                        >
+                          delete_forever
+                        </Icon>
+                      </Grid>
+                    </Grid>
                   </Paper>
                 </Grid>
               );
@@ -96,4 +128,4 @@ const mapStateToProps = state => ({
   buckets: state.buckets
 });
 
-export default connect(mapStateToProps)(ToDo);
+export default connect(mapStateToProps, { deleteBucket })(ToDo);
