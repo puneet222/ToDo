@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import {
-  Typography,
-  Paper,
-  Grid,
-  Modal,
-  Backdrop,
-  Fade,
-  Icon
-} from "@material-ui/core";
+import { Paper, Grid, Modal, Backdrop, Fade } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { CreateBucket } from "./CreateBucket";
 import { deleteBucket } from "../../actions/todoActions";
+import { CreateBucket } from "./CreateBucket";
+import { TodoBucket } from "./TodoBucket";
 import Bucket from "../bucket/Bucket";
 
 const useStyles = makeStyles(theme => ({
@@ -62,35 +55,10 @@ const ToDo = props => {
                       handleOpen(bucket);
                     }}
                   >
-                    <Grid container>
-                      <Grid item xs={11}>
-                        <Typography variant="h5" component="h3">
-                          {bucket.name}
-                        </Typography>
-                        <Typography component="p">
-                          <span>{bucket.tasks.length} Tasks </span>
-                          <span className="done-task">
-                            {
-                              bucket.tasks.filter(task => task.isDone === true)
-                                .length
-                            }{" "}
-                            Done
-                          </span>
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={1}>
-                        <Icon
-                          color="disabled"
-                          className="pointer"
-                          onClick={e => {
-                            e.stopPropagation();
-                            handleDeleteBucket(bucket.id);
-                          }}
-                        >
-                          delete_forever
-                        </Icon>
-                      </Grid>
-                    </Grid>
+                    <TodoBucket
+                      bucket={bucket}
+                      deleteBucket={handleDeleteBucket}
+                    />
                   </Paper>
                 </Grid>
               );
