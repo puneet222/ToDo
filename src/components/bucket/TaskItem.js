@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Input, Checkbox, Grid, Icon } from "@material-ui/core";
 
 export const TaskItem = ({
@@ -79,4 +80,11 @@ export const TaskItem = ({
       </Grid>
     </div>
   );
+};
+
+TaskItem.propTypes = {
+  task: PropTypes.object.isRequired,
+  updateTask: PropTypes.func.isRequired,
+  updateTaskDescription: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired
 };

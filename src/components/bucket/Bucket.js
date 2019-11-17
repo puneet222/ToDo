@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import uuid from "uuid";
 import { connect } from "react-redux";
@@ -249,6 +250,14 @@ const Bucket = ({
       </CardActions>
     </Card>
   );
+};
+
+Bucket.propTypes = {
+  isEdit: PropTypes.bool,
+  createBucket: PropTypes.func.isRequired,
+  updateBucket: PropTypes.func.isRequired,
+  modalClose: PropTypes.func,
+  currentBucket: PropTypes.object
 };
 
 export default connect(null, { createBucket, updateBucket })(Bucket);
