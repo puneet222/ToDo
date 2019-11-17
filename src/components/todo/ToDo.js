@@ -63,22 +63,22 @@ const ToDo = props => {
                     }}
                   >
                     <Grid container>
-                      <Grid xs={11}>
+                      <Grid item xs={11}>
                         <Typography variant="h5" component="h3">
                           {bucket.name}
                         </Typography>
                         <Typography component="p">
                           <span>{bucket.tasks.length} Tasks </span>
-                          <span>
+                          <span className="done-task">
                             {
                               bucket.tasks.filter(task => task.isDone === true)
                                 .length
                             }{" "}
-                            Completed
+                            Done
                           </span>
                         </Typography>
                       </Grid>
-                      <Grid xs={1}>
+                      <Grid item xs={1}>
                         <Icon
                           color="disabled"
                           className="pointer"

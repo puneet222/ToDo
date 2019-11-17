@@ -24,6 +24,11 @@
   width: 50%;
 }
 
+.done-task {
+  font-size: 0.85em;
+  color: grey;
+}
+
 /* For Mobile */
 @media screen and (max-width: 540px) {
   .modal-content-small {
