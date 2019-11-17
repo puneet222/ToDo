@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { Fab, Typography } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import amber from "@material-ui/core/colors/amber";
@@ -29,4 +30,8 @@ export const CreateBucket = ({ noBuckets }) => {
       </Link>
     </React.Fragment>
   );
+};
+
+CreateBucket.propTypes = {
+  noBuckets: PropTypes.bool.isRequired
 };
